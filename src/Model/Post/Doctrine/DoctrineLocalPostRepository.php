@@ -1,8 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Model\Post;
+namespace App\Model\Post\Doctrine;
 
+use App\Model\Post\LocalPostRepository;
+use App\Model\Post\Post;
 use DateTime;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Types\Type;

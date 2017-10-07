@@ -1,8 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Model\Post;
+namespace App\Model\Post\Facebook;
 
+use App\Model\Post\Post;
+use App\Model\Post\RemotePostRepository;
 use DateTime;
 use Facebook\Facebook;
 

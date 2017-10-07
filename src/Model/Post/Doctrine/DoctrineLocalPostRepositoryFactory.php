@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Model\Post;
+namespace App\Model\Post\Doctrine;
 
 use App\Model\Page\Page;
+
 use Doctrine\DBAL\Connection;
 
 class DoctrineLocalPostRepositoryFactory
