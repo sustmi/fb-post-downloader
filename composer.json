@@ -1,6 +1,8 @@
 {
+    "name": "sustmi/fb-post-downloader",
+    "description": "A tool for downloading latest posts from several Facebook Pages into local database",
     "type": "project",
-    "license": "proprietary",
+    "license": "MIT",
     "require": {
         "php": "^7.0.8",
         "symfony/framework-bundle": "^3.3",
