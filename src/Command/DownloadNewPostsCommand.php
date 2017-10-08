@@ -7,7 +7,7 @@ use App\Model\Downloader\PostDownloader;
 use App\Model\Page\Page;
 use App\Model\Page\PageRepository;
 use App\Model\Post\Doctrine\DoctrinePostStorageFactory;
-use App\Model\Post\Facebook\FacebookRemotePostRepositoryFactory;
+use App\Model\Post\Facebook\FacebookPostSourceFactory;
 use Facebook\Exceptions\FacebookResponseException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -22,9 +22,9 @@ class DownloadNewPostsCommand extends Command
     private $pageRepository;
 
     /**
-     * @var FacebookRemotePostRepositoryFactory
+     * @var FacebookPostSourceFactory
      */
-    private $facebookRemotePostRepositoryFactory;
+    private $facebookPostSourceFactory;
 
     /**
      * @var DoctrinePostStorageFactory
@@ -38,12 +38,12 @@ class DownloadNewPostsCommand extends Command
 
     public function __construct(
         PageRepository $pageRepository,
-        FacebookRemotePostRepositoryFactory $facebookRemotePostRepositoryFactory,
+        FacebookPostSourceFactory $facebookPostSourceFactory,
         DoctrinePostStorageFactory $doctrinePostStorageFactory,
         PostDownloader $postDownloader
     ) {
         $this->pageRepository = $pageRepository;
-        $this->facebookRemotePostRepositoryFactory = $facebookRemotePostRepositoryFactory;
+        $this->facebookPostSourceFactory = $facebookPostSourceFactory;
         $this->doctrinePostStorageFactory = $doctrinePostStorageFactory;
         $this->postDownloader = $postDownloader;
 
@@ -79,11 +79,11 @@ class DownloadNewPostsCommand extends Command
 
     private function downloadNewPostsForPage(Page $page)
     {
-        $remotePostRepository = $this->facebookRemotePostRepositoryFactory->createForPage($page);
+        $postSource = $this->facebookPostSourceFactory->createForPage($page);
         $postStorage = $this->doctrinePostStorageFactory->createForPage($page);
 
         return $this->postDownloader->downloadNewPosts(
-            $remotePostRepository,
+            $postSource,
             $postStorage,
             200
         );

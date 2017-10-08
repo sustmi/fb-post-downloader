@@ -7,7 +7,7 @@ use DateTime;
 /**
  * Adapter interface for retrieving posts from a remote web API
  */
-interface RemotePostRepository
+interface PostSource
 {
     /**
      * Gets posts created since the specified time (inclusive)

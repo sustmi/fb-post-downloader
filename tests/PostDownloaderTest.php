@@ -18,12 +18,12 @@ class PostDownloaderTest extends TestCase
             new Post('103', new DateTime('2017-01-01 13:00:00')),
         ];
 
-        $remotePostRepository = new TestRemoteRepository($remotePosts);
+        $postSource = new TestPostSource($remotePosts);
         $postStorage = new TestPostStorage([]);
 
         $postDownloader = new PostDownloader();
         $downloadedPostsCount = $postDownloader->downloadNewPosts(
-            $remotePostRepository,
+            $postSource,
             $postStorage,
             10
         );
@@ -39,12 +39,12 @@ class PostDownloaderTest extends TestCase
             new Post('103', new DateTime('2017-01-01 13:00:00')),
         ];
 
-        $remotePostRepository = new TestRemoteRepository($remotePosts);
+        $postSource = new TestPostSource($remotePosts);
         $postStorage = new TestPostStorage([]);
 
         $postDownloader = new PostDownloader();
         $postDownloader->downloadNewPosts(
-            $remotePostRepository,
+            $postSource,
             $postStorage,
             2
         );
@@ -66,12 +66,12 @@ class PostDownloaderTest extends TestCase
             new Post('200', new DateTime('2017-01-01 12:30:00')),
         ];
 
-        $remotePostRepository = new TestRemoteRepository($remotePosts);
+        $postSource = new TestPostSource($remotePosts);
         $postStorage = new TestPostStorage($localPosts);
 
         $postDownloader = new PostDownloader();
         $postDownloader->downloadNewPosts(
-            $remotePostRepository,
+            $postSource,
             $postStorage,
             10
         );

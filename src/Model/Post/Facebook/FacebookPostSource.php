@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace App\Model\Post\Facebook;
 
 use App\Model\Post\Post;
-use App\Model\Post\RemotePostRepository;
+use App\Model\Post\PostSource;
 use DateTime;
 use Facebook\Facebook;
 
-class FacebookRemotePostRepository implements RemotePostRepository
+class FacebookPostSource implements PostSource
 {
     /**
      * @var string

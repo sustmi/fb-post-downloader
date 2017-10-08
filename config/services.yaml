@@ -27,8 +27,8 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    App\Model\Post\Facebook\FacebookRemotePostRepositoryFactory:
-        class: App\Model\Post\Facebook\FacebookRemotePostRepositoryFactory
+    App\Model\Post\Facebook\FacebookPostSourceFactory:
+        class: App\Model\Post\Facebook\FacebookPostSourceFactory
         arguments:
             - "%env(FACEBOOK_APP_ID)%"
             - "%env(FACEBOOK_APP_SECRET)%"

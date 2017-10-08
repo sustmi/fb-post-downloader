@@ -7,7 +7,7 @@ use App\Model\Page\Page;
 
 use Facebook\Facebook;
 
-class FacebookRemotePostRepositoryFactory
+class FacebookPostSourceFactory
 {
     /**
      * @var string
@@ -25,7 +25,7 @@ class FacebookRemotePostRepositoryFactory
         $this->appSecret = $appSecret;
     }
 
-    public function createForPage(Page $page): FacebookRemotePostRepository
+    public function createForPage(Page $page): FacebookPostSource
     {
         $facebook = new Facebook([
             'app_id' => $this->appId,
@@ -34,7 +34,7 @@ class FacebookRemotePostRepositoryFactory
             'default_access_token' => $this->appId . '|' . $this->appSecret,
         ]);
 
-        return new FacebookRemotePostRepository(
+        return new FacebookPostSource(
             $page->getId(),
             $facebook
         );

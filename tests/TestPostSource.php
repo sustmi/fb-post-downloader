@@ -4,10 +4,10 @@ declare(strict_types=1);
 namespace App\Tests;
 
 use App\Model\Post\Post;
-use App\Model\Post\RemotePostRepository;
+use App\Model\Post\PostSource;
 use DateTime;
 
-class TestRemoteRepository implements RemotePostRepository
+class TestPostSource implements PostSource
 {
     /**
      * @var Post[]
