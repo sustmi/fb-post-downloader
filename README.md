@@ -32,3 +32,6 @@ php bin/console app:download-new-posts
 ```
 
 This command downloads new posts for all pages or last 200 posts if no posts were downloaded yet.
+
+## Contributing
+Always run `make checks` to make sure that your code adheres the coding standards and passes tests.
