@@ -3,9 +3,15 @@ ifndef APP_ENV
 endif
 
 .DEFAULT_GOAL := help
-.PHONY: help
+.PHONY: help standards
 help:
 	@grep -E '^[a-zA-Z-]+:.*?## .*$$' Makefile | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "[32m%-15s[0m %s\n", $$1, $$2}'
+
+standards:
+	php vendor/bin/parallel-lint ./src ./tests
+	php vendor/bin/php-cs-fixer fix --config=vendor/shopsys/coding-standards/build/phpcs-fixer.php_cs --dry-run --verbose --diff ./src ./tests
+	php vendor/bin/phpcs --standard=vendor/shopsys/coding-standards/rulesetCS.xml --extensions=php --encoding=utf-8 --tab-width=4 -sp ./src ./tests
+	php vendor/bin/phpmd ./src,./tests text vendor/shopsys/coding-standards/rulesetMD.xml --extensions=php
 
 ###> symfony/framework-bundle ###
 CONSOLE := $(shell which bin/console)
