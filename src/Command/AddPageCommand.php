@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command;
@@ -16,7 +17,8 @@ class AddPageCommand extends Command
      */
     private $pageRepository;
 
-    public function __construct(PageRepository $pageRepository) {
+    public function __construct(PageRepository $pageRepository)
+    {
         $this->pageRepository = $pageRepository;
 
         parent::__construct();

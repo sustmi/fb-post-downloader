@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Post\Doctrine;
 
-use App\Model\Post\PostStorage;
 use App\Model\Post\Post;
+use App\Model\Post\PostStorage;
 use DateTime;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Types\Type;

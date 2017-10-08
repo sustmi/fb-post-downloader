@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Tests;
 
-use App\Model\Post\PostStorage;
 use App\Model\Post\Post;
+use App\Model\Post\PostStorage;
 
 class TestPostStorage implements PostStorage
 {
@@ -42,7 +43,8 @@ class TestPostStorage implements PostStorage
     /**
      * @return Post[]
      */
-    public function getPosts(): array {
+    public function getPosts(): array
+    {
         return $this->posts;
     }
 }

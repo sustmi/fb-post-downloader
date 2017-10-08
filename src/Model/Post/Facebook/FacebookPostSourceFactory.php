@@ -1,10 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Post\Facebook;
 
 use App\Model\Page\Page;
-
 use Facebook\Facebook;
 
 class FacebookPostSourceFactory

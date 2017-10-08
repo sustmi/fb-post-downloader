@@ -1,10 +1,11 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Model\Downloader;
 
-use App\Model\Post\PostStorage;
 use App\Model\Post\PostSource;
+use App\Model\Post\PostStorage;
 
 class PostDownloader
 {

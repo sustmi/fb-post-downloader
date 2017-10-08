@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Tests;
@@ -19,8 +20,8 @@ class TestPostSource implements PostSource
      */
     public function __construct(array $posts)
     {
-        usort($posts, function (Post $a, Post $b) {
-            return $a->getCreatedAt()->getTimestamp() - $b->getCreatedAt()->getTimestamp();
+        usort($posts, function (Post $postA, Post $postB) {
+            return $postA->getCreatedAt()->getTimestamp() - $postB->getCreatedAt()->getTimestamp();
         });
 
         $this->sortedPosts = $posts;

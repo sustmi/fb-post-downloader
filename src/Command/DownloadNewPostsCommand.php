@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Command;
@@ -49,7 +50,6 @@ class DownloadNewPostsCommand extends Command
 
         parent::__construct();
     }
-
 
     protected function configure()
     {
