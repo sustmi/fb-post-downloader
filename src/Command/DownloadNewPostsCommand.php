@@ -12,6 +12,7 @@ use Facebook\Exceptions\FacebookResponseException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Throwable;
 
 class DownloadNewPostsCommand extends Command
 {
@@ -64,9 +65,15 @@ class DownloadNewPostsCommand extends Command
         foreach ($pages as $page) {
             $output->writeln(sprintf('Downloading posts for page "%s"...', $page->getId()));
 
-            $newPostsDownloaded = $this->downloadNewPostsForPage($page);
+            try {
+                $newPostsDownloaded = $this->downloadNewPostsForPage($page);
 
-            $output->writeln(sprintf('Downloaded %d new posts.', $newPostsDownloaded));
+                $output->writeln(sprintf('Downloaded %d new posts.', $newPostsDownloaded));
+            } catch (Throwable $throwable) {
+                $output->writeln('Error: ' . $throwable->getMessage());
+            }
+
+            $output->write("\n");
         }
     }
 
