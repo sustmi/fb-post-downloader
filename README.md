@@ -1,5 +1,5 @@
 # Facebook Post Downloader
-This tool downloads posts from Facebook Pages into local storage.
+A command line tool for downloading posts from Facebook Pages into local storage.
 
 ## Installation
 ### 1. Install dependencies
