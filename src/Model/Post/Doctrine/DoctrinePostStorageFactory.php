@@ -7,7 +7,7 @@ use App\Model\Page\Page;
 
 use Doctrine\DBAL\Connection;
 
-class DoctrineLocalPostRepositoryFactory
+class DoctrinePostStorageFactory
 {
     /**
      * @var Connection
@@ -19,9 +19,9 @@ class DoctrineLocalPostRepositoryFactory
         $this->databaseConnection = $databaseConnection;
     }
 
-    public function createForPage(Page $page): DoctrineLocalPostRepository
+    public function createForPage(Page $page): DoctrinePostStorage
     {
-        return new DoctrineLocalPostRepository(
+        return new DoctrinePostStorage(
             $page->getId(),
             $this->databaseConnection
         );

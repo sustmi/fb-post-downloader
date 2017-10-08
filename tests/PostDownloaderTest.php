@@ -19,12 +19,12 @@ class PostDownloaderTest extends TestCase
         ];
 
         $remotePostRepository = new TestRemoteRepository($remotePosts);
-        $localPostRepository = new TestLocalRepository([]);
+        $postStorage = new TestPostStorage([]);
 
         $postDownloader = new PostDownloader();
         $downloadedPostsCount = $postDownloader->downloadNewPosts(
             $remotePostRepository,
-            $localPostRepository,
+            $postStorage,
             10
         );
 
@@ -40,16 +40,16 @@ class PostDownloaderTest extends TestCase
         ];
 
         $remotePostRepository = new TestRemoteRepository($remotePosts);
-        $localPostRepository = new TestLocalRepository([]);
+        $postStorage = new TestPostStorage([]);
 
         $postDownloader = new PostDownloader();
         $postDownloader->downloadNewPosts(
             $remotePostRepository,
-            $localPostRepository,
+            $postStorage,
             2
         );
 
-        $this->assertCount(2, $localPostRepository->getPosts());
+        $this->assertCount(2, $postStorage->getPosts());
     }
 
     public function testDownloadsOnlyNewPosts()
@@ -67,12 +67,12 @@ class PostDownloaderTest extends TestCase
         ];
 
         $remotePostRepository = new TestRemoteRepository($remotePosts);
-        $localPostRepository = new TestLocalRepository($localPosts);
+        $postStorage = new TestPostStorage($localPosts);
 
         $postDownloader = new PostDownloader();
         $postDownloader->downloadNewPosts(
             $remotePostRepository,
-            $localPostRepository,
+            $postStorage,
             10
         );
 
@@ -82,7 +82,7 @@ class PostDownloaderTest extends TestCase
                 function (Post $post) {
                     return $post->getId();
                 },
-                $localPostRepository->getPosts()
+                $postStorage->getPosts()
             )
         );
     }

@@ -6,7 +6,7 @@ namespace App\Model\Post;
 /**
  * Adapter interface for local posts storage
  */
-interface LocalPostRepository
+interface PostStorage
 {
     /**
      * Returns newest post or null if the storage is empty.

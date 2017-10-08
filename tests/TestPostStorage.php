@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace App\Tests;
 
-use App\Model\Post\LocalPostRepository;
+use App\Model\Post\PostStorage;
 use App\Model\Post\Post;
 
-class TestLocalRepository implements LocalPostRepository
+class TestPostStorage implements PostStorage
 {
     /**
      * @var Post[]

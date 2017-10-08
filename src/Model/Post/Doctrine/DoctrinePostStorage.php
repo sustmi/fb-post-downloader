@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace App\Model\Post\Doctrine;
 
-use App\Model\Post\LocalPostRepository;
+use App\Model\Post\PostStorage;
 use App\Model\Post\Post;
 use DateTime;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Types\Type;
 
-class DoctrineLocalPostRepository implements LocalPostRepository
+class DoctrinePostStorage implements PostStorage
 {
     /**
      * @var string

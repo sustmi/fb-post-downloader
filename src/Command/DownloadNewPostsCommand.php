@@ -6,7 +6,7 @@ namespace App\Command;
 use App\Model\Downloader\PostDownloader;
 use App\Model\Page\Page;
 use App\Model\Page\PageRepository;
-use App\Model\Post\Doctrine\DoctrineLocalPostRepositoryFactory;
+use App\Model\Post\Doctrine\DoctrinePostStorageFactory;
 use App\Model\Post\Facebook\FacebookRemotePostRepositoryFactory;
 use Facebook\Exceptions\FacebookResponseException;
 use Symfony\Component\Console\Command\Command;
@@ -27,9 +27,9 @@ class DownloadNewPostsCommand extends Command
     private $facebookRemotePostRepositoryFactory;
 
     /**
-     * @var DoctrineLocalPostRepositoryFactory
+     * @var DoctrinePostStorageFactory
      */
-    private $doctrineLocalPostRepositoryFactory;
+    private $doctrinePostStorageFactory;
 
     /**
      * @var PostDownloader
@@ -39,12 +39,12 @@ class DownloadNewPostsCommand extends Command
     public function __construct(
         PageRepository $pageRepository,
         FacebookRemotePostRepositoryFactory $facebookRemotePostRepositoryFactory,
-        DoctrineLocalPostRepositoryFactory $doctrineLocalPostRepositoryFactory,
+        DoctrinePostStorageFactory $doctrinePostStorageFactory,
         PostDownloader $postDownloader
     ) {
         $this->pageRepository = $pageRepository;
         $this->facebookRemotePostRepositoryFactory = $facebookRemotePostRepositoryFactory;
-        $this->doctrineLocalPostRepositoryFactory = $doctrineLocalPostRepositoryFactory;
+        $this->doctrinePostStorageFactory = $doctrinePostStorageFactory;
         $this->postDownloader = $postDownloader;
 
         parent::__construct();
@@ -80,11 +80,11 @@ class DownloadNewPostsCommand extends Command
     private function downloadNewPostsForPage(Page $page)
     {
         $remotePostRepository = $this->facebookRemotePostRepositoryFactory->createForPage($page);
-        $localPostRepository = $this->doctrineLocalPostRepositoryFactory->createForPage($page);
+        $postStorage = $this->doctrinePostStorageFactory->createForPage($page);
 
         return $this->postDownloader->downloadNewPosts(
             $remotePostRepository,
-            $localPostRepository,
+            $postStorage,
             200
         );
     }
