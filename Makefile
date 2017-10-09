@@ -7,15 +7,15 @@ endif
 help:
 	@grep -E '^[a-zA-Z-]+:.*?## .*$$' Makefile | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "[32m%-15s[0m %s\n", $$1, $$2}'
 
-checks: standards tests
+checks: standards tests ## Runs all checks (standards and tests)
 
-standards:
+standards: ## Checks coding standards
 	php vendor/bin/parallel-lint ./src ./tests
-	php vendor/bin/php-cs-fixer fix --config=vendor/shopsys/coding-standards/build/phpcs-fixer.php_cs --dry-run --verbose --diff ./src ./tests
+	php vendor/bin/php-cs-fixer fix --config=./phpcs-fixer.php_cs  --dry-run --verbose --diff ./src ./tests
 	php vendor/bin/phpcs --standard=vendor/shopsys/coding-standards/rulesetCS.xml --extensions=php --encoding=utf-8 --tab-width=4 -sp ./src ./tests
 	php vendor/bin/phpmd ./src,./tests text vendor/shopsys/coding-standards/rulesetMD.xml --extensions=php
 
-tests:
+tests: ## Runs tests
 	php vendor/bin/phpunit
 
 ###> symfony/framework-bundle ###
