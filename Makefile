@@ -11,9 +11,13 @@ checks: standards tests ## Runs all checks (standards and tests)
 
 standards: ## Checks coding standards
 	php vendor/bin/parallel-lint ./src ./tests
-	php vendor/bin/php-cs-fixer fix --config=./phpcs-fixer.php_cs  --dry-run --verbose --diff ./src ./tests
+	php vendor/bin/php-cs-fixer fix --config=./phpcs-fixer.php_cs --dry-run --verbose --diff ./src ./tests
 	php vendor/bin/phpcs --standard=vendor/shopsys/coding-standards/rulesetCS.xml --extensions=php --encoding=utf-8 --tab-width=4 -sp ./src ./tests
 	php vendor/bin/phpmd ./src,./tests text vendor/shopsys/coding-standards/rulesetMD.xml --extensions=php
+
+standards-fix: ## Fixes coding standards automatically (where possible)
+	php vendor/bin/php-cs-fixer fix --config=./phpcs-fixer.php_cs --verbose --diff ./src ./tests
+	php vendor/bin/phpcbf --standard=vendor/shopsys/coding-standards/rulesetCS.xml --extensions=php --encoding=utf-8 --tab-width=4 -sp ./src ./tests
 
 tests: ## Runs tests
 	php vendor/bin/phpunit
